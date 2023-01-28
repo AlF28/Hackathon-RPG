@@ -74,7 +74,7 @@ def room_3():
 
         if player_choice == "1":
             print("Bunny: How rude of you! I am not just any bunny, I am SIR BUNNY THE DISTINGUISHED. I have served\n"
-                  "in the great thrice and have survived thrice, my grandfather has served in.....\n"
+                  "in the great war thrice and have survived thrice, my grandfather has served in.....\n"
                   "The player decides to leave the room")
         else player_choice == "2":
             print("Bunny: Howdy human! I wonder how you ended up in this corner of galaxy. It is far away from\n"
