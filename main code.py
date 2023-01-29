@@ -42,7 +42,7 @@ def prologue():
          O      *        '       .""")
     print_slow(f"A lonely space cowboy travels the space in search of their home Earth. In an unforeseen turn of events, the" +
           "spaceship crashes with onto an unknown planet with a loud boom.\n")
-    print_slow("The space cowboy is now stranded on an unknown planet, and a broken ship. The player have no way of going back home.\n")
+    print_slow("The space cowboy is now stranded on an unknown planet with a broken ship. The player have no way of going back home.\n")
     print_slow("The space cowboy is met with friendly faces, as humans on this planet came to help him after hearing the loud noise.\n")
     print_slow("But alas! they were not humans! they were shape shifters of this planet called the ZARALEGG,\n"
           "plotting to steal his items and ship parts.\n")
