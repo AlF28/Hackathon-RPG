@@ -80,7 +80,7 @@ def boss_fight1(player):
     inventory = []
     zaralegg_general_1 = Enemy(60, 6, 8) #enemy stats
     battleBegin = 1
-    print_slow(player.playerName, "has encountered an enemy! The enemy glares menacingly and brandishes their weapon. The\n"
+    print_slow(f"{player.playerName} has encountered an enemy! The enemy glares menacingly and brandishes their weapon. The\n"
                              "blade gleams in the light.\n")
     print_slow("I am the great first general of the Zaralegg race, and YOU! HOW DARE YOU TRY AND ESCAPE!!!\n"
           "I will show you puny human the power of the ZARALEGG RACE. MUAHAHAHA\n")
