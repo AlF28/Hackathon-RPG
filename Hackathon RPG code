@@ -37,11 +37,33 @@ def prologue():
     print("But alas! they were not humans! they were shape shifters of this planet called the ZARALEGG, \n"
           "plotting to steal his items and ship parts.")
     print("The player now awakes in a jail cell in their underwear, all their clothes and weapons are gone.")
-
+#boss fight 1
 def boss_fight1(player):
     print(f"{player.playerName} enters the next room. The floor creeks with each step.")
     print(f"{player.playerName} looks around and sees the walls covered with poisonous goo.\n"
           f"Something drops from above, and lands with a loud thud!.\n")
+    print("""
+       ______
+         /_.  ._\
+        (( \\// ))
+         \\ \/ //
+          \\/\//
+     \\\  ( '' )  ///
+      )))  \__/  (((
+     (((.'__||__'.)))
+      \\  )    (  //
+       \\/.'  '.\//
+        \/ |,,| \/
+      |  |
+           |  |
+           //\\
+          //  \\
+         ||    ||
+         ||    ||
+         ||    ||
+      ___))    ((___
+     (____)    (____)             """)
+
 
     inventory = []
     zaralegg_general_1 = Enemy(60, 6, 8) #enemy stats
@@ -180,11 +202,345 @@ def boss_fight1(player):
 
         else:
             print(player.playerName, "grumbles. Give them a real choice, they only have so much time!")
+#boss fight 2
+def boss_fight2(player, inventory):
+    print(f"{player.playerName} slowly opens the door to the next room, checking for another anthropomorphic animal.\n")
+    print(f"{player.playerName} determines the coast is clear and tip toes in.")
+    print("Thud!")
+    print("""
+          _..._
+         .'     '.
+        /`\     /`\    |\
+       (__|     |__)|\  \\  /|
+       (     "     ) \\ || //
+        \         /   \\||//
+         \   _   /  |\|`  /
+          '.___.'   \____/
+           (___)    (___)
+         /`     `\  / /
+        |         \/ /
+        | |     |\  /
+        | |     | "`
+        | |     |
+        | |     |
+        |_|_____|
+       (___)_____)
+       /    \   |
+      /   |\|   |
+     //||\\  Y  |
+    || || \\ |  |
+    |/ \\ |\||  |
+        \||__|__|
+         (___|___)
+         /   A   \
+        /   / \   \
+       \___/   \___/    """)
+    print(f"Suddenly {player.playerName} is lying on the floor when a figure appears out of the shadows.")
+    print(f"{player.playerName} strains their head to look up at the tall, lanky alien standing in front of them. ")
+    print("\"Hello, human. You can call me Professor Z.\" the alien said plainly.")
+    print("\"I know you're thinking 'I don't care who you are. Let me go!', but let me finish.\" said Professor Z")
+    print("Professor Z turned around and pulled out what seemed to be chalk board that uses lasers.")
+    print("\"What you're wrapped in is my infalliable zaralegg fiber silk. I'm the first one to synthesize g chain amin... \"")
+    print(f"{player.playerName} could feel the silk melting, allowing them to slowly pull it off during the lecture.")
+    print("\"So that's all to say that my invention is perfect for capturing human speci-\"")
+    print("Professor Z turned around to find his specimen had freed themselves from the special unbreakable fiber.")
+    print("\"Impossible! I've been working on this for eleventeen gorbles. Well, now I have to kill you.\" Professor Z announced.\n")
+
+    enemy2 = Enemy(100, 10, 15)
+    battleBegin = 1
+    maxHealth = player.playerHealth
+    maxHealthE = enemy2.enemyHealth
+    # if player encounters an enemy, battleBegin = 1, i cant figure out boolean rn lol
+
+    while battleBegin == 1:
+
+        print("What will", player.playerName, "do?\n")
+        print(player.playerName, "'s Health:", player.playerHealth, "/", maxHealth)
+        print("Enemy's Health:", enemy2.enemyHealth, "/", maxHealthE)
+        print("1. Attack")
+        print("2. Dodge")
+        print("3. Open Inventory")
+        playerChoice = input()
+        if playerChoice == "1":
+            playerMiss = random.randint(1, 20)
+            enemyMiss = random.randint(1, 20)
+            # player attacks here
+            if playerMiss == 1:
+                print("Oh no!", player.playerName, "slips, and misses!")
+            else:
+                damageDealt = random.randint(player.playerAttack - 2, player.playerAttack + 2) - enemy2.enemyDefense / 4
+
+                crit = random.randint(1, 10)
+                if crit == 1:
+                    damageDealt = damageDealt * 2
+                    print("Lucky hit!", player.playerName, "deals", damageDealt, "points of pain to the enemy!")
+                    enemy2.enemyHealth = enemy2.enemyHealth - damageDealt
+                else:
+                    print(player.playerName, "attacks swiftly! They deliver", damageDealt, "damage to the enemy!")
+                    enemy2.enemyHealth = enemy2.enemyHealth - damageDealt
+
+            if enemy2.enemyHealth >= 0:
+                # enemy attacks here
+                damageReceived = random.randint(enemy2.enemyAttack - 2,
+                                                enemy2.enemyAttack + 2) - player.playerDefense / 4
+
+                if enemyMiss == 1:
+                    print(player.playerName, "cheers as the enemy misses. Lucky turn!")
+                else:
+                    critE = random.randint(1, 10)
+                    if critE == 1:
+                        damageReceived = damageReceived * 2
+                        print("Unlucky! Enemy deals", damageDealt, "damage to", player.playerName, "!")
+                        player.playerHealth = player.playerHealth - damageReceived
+                    else:
+                        print("Enemy attacks", player.playerName, "and deals", damageReceived, "damage to",
+                              player.playerName, "!")
+                        player.playerHealth = player.playerHealth - damageReceived
+
+            # now check if enemy or player are dead
+            if (enemy2.enemyHealth < maxHealthE / 3) and (enemy2.enemyHealth > 0):
+                print("The enemy looks shaken! Deliver the final blow soon!")
+            if enemy2.enemyHealth <= 0:
+                print(player.playerName, "has defeated the enemy! They can progress to the next room!")
+                battleBegin = 0
+
+            if (player.playerHealth < maxHealth / 3) and (player.playerHealth > 0):
+                print("Oh no!", player.playerName, "feels themselves weakening. Don't give up,", player.playerName, "!")
+
+            if player.playerHealth <= 0:
+                print(player.playerName, "sputters, then collapses. They have been defeated by the enemy.")
+                print("GAME OVER")
+                battleBegin = 2
+
+        elif playerChoice == "2":
+            # dodge has a chance of dealing less damage without being hit, but has a higher chance of fail and being hit
+            # not finished
+            dodge = random.randint(1, 10)
+
+            if dodge >= 4:
+                missHit = random.randint(enemy2.enemyAttack - 2, enemy2.enemyAttack + 2)
+                print(player.playerName, "prepares to leap out of the way, but they miscalculate their enemy! "
+                                         "The hit lands, dealing", missHit, "damage along the way.")
+                player.playerHealth = player.playerHealth - missHit
+            else:
+                dodgeDamage = random.randint(player.playerAttack - 2, player.playerAttack + 2) - enemy2.enemyDefense / 2
+                print(player.playerName,
+                      "readies themself and springs out of the way at the last second. They strike at "
+                      "the enemy, and deal", dodgeDamage, "damage.")
+                enemy2.enemyHealth = enemy2.enemyHealth - dodgeDamage
+
+            if (enemy2.enemyHealth < maxHealthE / 3) and (enemy2.enemyHealth > 0):
+                print("The enemy looks shaken! Deliver the final blow soon!")
+            if enemy2.enemyHealth <= 0:
+                print(player.playerName, "has defeated the enemy! They can progress to the next room!")
+                battleBegin = 0
+
+            if (player.playerHealth < maxHealth / 3) and (player.playerHealth > 0):
+                print("Oh no!", player.playerName, "feels themselves weakening. Don't give up,", player.playerName, "!")
+
+            if player.playerHealth <= 0:
+                print(player.playerName, "sputters, then collapses. They have been defeated by the enemy.")
+                print("GAME OVER")
+                battleBegin = 2
+
+        elif playerChoice == "3":
+            print(player.playerName, "opens their bag. They find:")
+
+            if inventory:
+                for x in range(len(inventory)):
+                    print(x + 1, ".", inventory[x].itemName, ": Provides +", inventory[x].statBoost, " health")
+                endValue = len(inventory)
+                print(endValue + 1, ". Close inventory")
+                print("What item will they choose?")
+
+                inventoryChoice = input()
+                convert = int(inventoryChoice)
+
+                if convert != endValue + 1:
+                    itemConsumed = inventory[convert - 1]
+                    player.playerHealth = player.playerHealth + itemConsumed.statBoost
+                    if player.playerHealth > 100:
+                        player.playerHealth = 100
+
+                    inventory.remove(itemConsumed)
+                    print(player.playerName, "consumed the", itemConsumed.itemName,
+                          "and smiles. Tastes good! Their health is now",
+                          player.playerHealth, "out of 100.")
+            else:
+                print(player.playerName, "blinks, then tips their bag upside down. Nothing falls out.")
+
+        else:
+            print(player.playerName, "grumbles. Give them a real choice, they only have so much time!")
+
+def boss_fight3(player, inventory):
+        print(f"The cold air follows, as {player.playerName} steps into the next room\n")
+        print(f"Here {player.playerName} meets a man..err...alien")
+        print(f"The alien just stares at {player.playerName}")
+        print(f"{player.playerName}: Can I help you?")
+        print(f"hsssssssssssssssssssssssssssss\n QUE EPIC MUSIC")
+        print(""".     .       .  .   . .   .   . .    +  .
+          .     .  :     .    .. :. .___---------___.
+               .  .   .    .  :.:. _".^ .^ ^.  '.. :"-_. .
+            .  :       .  .  .:../:            . .^  :.:\.
+                .   . :: +. :.:/: .   .    .        . . .:\
+         .  :    .     . _ :::/:               .  ^ .  . .:\
+          .. . .   . - : :.:./.                        .  .:\
+          .      .     . :..|:                    .  .  ^. .:|
+            .       . : : ..||        .                . . !:|
+          .     . . . ::. ::\(                           . :)/
+         .   .     : . : .:.|. ######              .#######::|
+          :.. .  :-  : .:  ::|.#######           ..########:|
+         .  .  .  ..  .  .. :\ ########          :######## :/
+          .        .+ :: : -.:\ ########       . ########.:/
+            .  .+   . . . . :.:\. #######       #######..:/
+              :: . . . . ::.:..:.\           .   .   ..:/
+           .   .   .  .. :  -::::.\.       | |     . .:/
+              .  :  .  .  .-:.":.::.\             ..:/
+         .      -.   . . . .: .:::.:.\.           .:/
+        .   .   .  :      : ....::_:..:\   ___.  :/
+           .   .  .   .:. .. .  .: :.:.:\       :/
+             +   .   .   : . ::. :.:. .:.|\  .:/|
+             .         +   .  .  ...:: ..|  --.:|
+        .      . . .   .  .  . ... :..:.."(  ..)"
+         .   .       .      :  .   .: ::/  .  .::\              """)
+        enemy3 = Enemy(150, 20, 30)
+        battleBegin = 1
+        maxHealth = player.playerHealth
+        maxHealthE = enemy3.enemyHealth
+        # if player encounters an enemy, battleBegin = 1, i cant figure out boolean rn lol
+
+        while battleBegin == 1:
+
+            print("What will", player.playerName, "do?\n")
+            print(player.playerName, "'s Health:", player.playerHealth, "/", maxHealth)
+            print("Enemy's Health:", enemy3.enemyHealth, "/", maxHealthE)
+            print("1. Attack")
+            print("2. Dodge")
+            print("3. Open Inventory")
+            playerChoice = input()
+            if playerChoice == "1":
+                playerMiss = random.randint(1, 20)
+                enemyMiss = random.randint(1, 20)
+                # player attacks here
+                if playerMiss == 1:
+                    print("Oh no!", player.playerName, "slips, and misses!")
+                else:
+                    damageDealt = random.randint(player.playerAttack - 2,
+                                                 player.playerAttack + 2) - enemy3.enemyDefense / 4
+
+                    crit = random.randint(1, 10)
+                    if crit == 1:
+                        damageDealt = damageDealt * 2
+                        print("Lucky hit!", player.playerName, "deals", damageDealt, "points of pain to the enemy!")
+                        enemy3.enemyHealth = enemy3.enemyHealth - damageDealt
+                    else:
+                        print(player.playerName, "attacks swiftly! They deliver", damageDealt, "damage to the enemy!")
+                        enemy3.enemyHealth = enemy3.enemyHealth - damageDealt
+
+                if enemy3.enemyHealth >= 0:
+                    # enemy attacks here
+                    damageReceived = random.randint(enemy3.enemyAttack - 2,
+                                                    enemy3.enemyAttack + 2) - player.playerDefense / 4
+
+                    if enemyMiss == 1:
+                        print(player.playerName, "cheers as the enemy misses. Lucky turn!")
+                    else:
+                        critE = random.randint(1, 10)
+                        if critE == 1:
+                            damageReceived = damageReceived * 2
+                            print("Unlucky! Enemy deals", damageDealt, "damage to", player.playerName, "!")
+                            player.playerHealth = player.playerHealth - damageReceived
+                        else:
+                            print("Enemy attacks", player.playerName, "and deals", damageReceived, "damage to",
+                                  player.playerName, "!")
+                            player.playerHealth = player.playerHealth - damageReceived
+
+                # now check if enemy or player are dead
+                if (enemy3.enemyHealth < maxHealthE / 3) and (enemy3.enemyHealth > 0):
+                    print("The enemy looks shaken! Deliver the final blow soon!")
+                if enemy3.enemyHealth <= 0:
+                    print(player.playerName, "has defeated the enemy! They can progress to the next room!")
+                    print("The alien finally speaks: My liege I have failed you")
+                    battleBegin = 0
+
+                if (player.playerHealth < maxHealth / 3) and (player.playerHealth > 0):
+                    print("Oh no!", player.playerName, "feels themselves weakening. Don't give up,", player.playerName,
+                          "!")
+
+                if player.playerHealth <= 0:
+                    print(player.playerName, "sputters, then collapses. They have been defeated by the enemy.")
+                    print("GAME OVER")
+                    battleBegin = 2
+
+            elif playerChoice == "2":
+                # dodge has a chance of dealing less damage without being hit, but has a higher chance of fail and being hit
+                # not finished
+                dodge = random.randint(1, 10)
+
+                if dodge >= 4:
+                    missHit = random.randint(enemy3.enemyAttack - 2, enemy3.enemyAttack + 2)
+                    print(player.playerName, "prepares to leap out of the way, but they miscalculate their enemy! "
+                                             "The hit lands, dealing", missHit, "damage along the way.")
+                    player.playerHealth = player.playerHealth - missHit
+                else:
+                    dodgeDamage = random.randint(player.playerAttack - 2,
+                                                 player.playerAttack + 2) - enemy3.enemyDefense / 2
+                    print(player.playerName,
+                          "readies themself and springs out of the way at the last second. They strike at "
+                          "the enemy, and deal", dodgeDamage, "damage.")
+                    enemy3.enemyHealth = enemy3.enemyHealth - dodgeDamage
+
+                if (enemy3.enemyHealth < maxHealthE / 3) and (enemy3.enemyHealth > 0):
+                    print("The enemy looks shaken! Deliver the final blow soon!")
+                if enemy3.enemyHealth <= 0:
+                    print(player.playerName, "has defeated the enemy! They can progress to the next room!")
+                    print("The alien finally speaks: My liege I have failed you")
+                    battleBegin = 0
+
+                if (player.playerHealth < maxHealth / 3) and (player.playerHealth > 0):
+                    print("Oh no!", player.playerName, "feels themselves weakening. Don't give up,", player.playerName,
+                          "!")
+
+                if player.playerHealth <= 0:
+                    print(player.playerName, "sputters, then collapses. They have been defeated by the enemy.")
+                    print("GAME OVER")
+                    battleBegin = 2
+
+            elif playerChoice == "3":
+                print(player.playerName, "opens their bag. They find:")
+
+                if inventory:
+                    for x in range(len(inventory)):
+                        print(x + 1, ".", inventory[x].itemName, ": Provides +", inventory[x].statBoost, " health")
+                    endValue = len(inventory)
+                    print(endValue + 1, ". Close inventory")
+                    print("What item will they choose?")
+
+                    inventoryChoice = input()
+                    convert = int(inventoryChoice)
+
+                    if convert != endValue + 1:
+                        itemConsumed = inventory[convert - 1]
+                        player.playerHealth = player.playerHealth + itemConsumed.statBoost
+                        if player.playerHealth > 100:
+                            player.playerHealth = 100
+
+                        inventory.remove(itemConsumed)
+                        print(player.playerName, "consumed the", itemConsumed.itemName,
+                              "and smiles. Tastes good! Their health is now",
+                              player.playerHealth, "out of 100.")
+                else:
+                    print(player.playerName, "blinks, then tips their bag upside down. Nothing falls out.")
+
+            else:
+                print(player.playerName, "grumbles. Give them a real choice, they only have so much time!")
+
+
 
 #room 1
 def room_1(player):
 
-    print(f"{player.playerName} enters room 1 and spots a large lever on the left.\n")
+    print(f"{player.playerName} enters room one and spots a large lever on the left.\n")
     lever = input(f"Should {player.playerName} push the lever down?\n"
                   f"1. Yes or 2. No, Enter 1 or 2: ")
 
@@ -308,7 +664,7 @@ def room_1(player):
                 print("Not a valid input, silly! Try again: ")
 #room 2
 def room_2(player, inventory):
-    print(f"{player.playerName} has entered room 2.\n")
+    print(f"{player.playerName} has entered room two.\n")
     print(f"{player.playerName} sees what appears to be a locked picnic basket sitting on the floor.")
 
     basket_choice = input(f"Choose to 1. find the key or 2.smash the basket\n"
@@ -328,23 +684,44 @@ def room_2(player, inventory):
             foodstats_1 = input(f"Which item will {player.playerName} take? Pick 1, 2, or 3: ")
 
             if foodstats_1 == "1":
-                granola_bar = Food(15, "Granola Bar")
+                print("""
+                     _____________,-.___     _
+                     |____        { {]_]_]   [_]
+                     |___ `-----.__\ \_]_]_    . `
+                     |   `-----.____} }]_]_]_   ,
+                     |_____________/ {_]_]_]_] , `
+                               `-'                    """)
+                granola_bar = Food(20, "Granola Bar")
                 print(f"Heals for:{granola_bar.statBoost} health\n")
                 inventory.append(granola_bar)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             elif foodstats_1 == "2":
-                pizza = Food(25, "Pizza")
+                print("""
+                // ""--.._
+                ||  (_)  _ "-._
+                ||    _ (_)    '-.
+                ||   (_)   __..-'
+                 \\__..--""
+                                 """)
+
+                pizza = Food(30, "Pizza")
                 print(f"Heals for:{pizza.statBoost} health\n")
                 inventory.append(pizza)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             elif foodstats_1 == "3":
-                apple = Food(10, "Red apple")
+                print("""
+                  ,--./,-.
+                 / #      \
+                |          |
+                 \        /    
+                  `._,._,'    """)
+                apple = Food(15, "Red apple")
                 print(f"Heals for:{apple.statBoost} health\n")
                 inventory.append(apple)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             else:
                 print("Invalid choice. Pick 1.granola bar, 2.red apple, or 3.pizza slice.")
 
@@ -354,23 +731,43 @@ def room_2(player, inventory):
             print(f"{player.playerName} unlocks the basket and sees three food items: 1.granola bar, 2.Pizza slice, and 3.Red Apple.")
             foodstats_1 = input(f"Which item will {player.playerName} take? Pick 1, 2, or 3: ")
             if foodstats_1 == "1":
-                granola_bar = Food(15, "Granola Bar")
+                print("""
+                     _____________,-.___     _
+                     |____        { {]_]_]   [_]
+                     |___ `-----.__\ \_]_]_    . `
+                     |   `-----.____} }]_]_]_   ,
+                     |_____________/ {_]_]_]_] , `
+                               `-'                    """)
+                granola_bar = Food(20, "Granola Bar")
                 print(f"Heals for:{granola_bar.statBoost} health\n")
                 inventory.append(granola_bar)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player,inventory)
             elif foodstats_1 == "2":
-                pizza = Food(25, "Pizza")
+                print("""
+                // ""--.._
+                ||  (_)  _ "-._
+                ||    _ (_)    '-.
+                ||   (_)   __..-'
+                 \\__..--""
+                                              """)
+                pizza = Food(30, "Pizza")
                 print(f"Heals for:{pizza.statBoost} health\n")
                 inventory.append(pizza)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             elif foodstats_1 == "3":
-                apple = Food(10, "Red Apple")
+                print("""
+                  ,--./,-.
+                 / #      \
+                |          |
+                 \        /    
+                  `._,._,'    """)
+                apple = Food(15, "Red Apple")
                 print(f"Heals for:{apple.statBoost} health\n")
                 inventory.append(apple)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             else:
                 print("Invalid choice. Pick 1.granola bar, 2.Pizza slice, and 3.Red Apple.")
 
@@ -390,23 +787,43 @@ def room_2(player, inventory):
             foodstats_1 = input(f"Which item will {player.playerName} take? Pick 1, 2, or 3: ")
 
             if foodstats_1 == "1":
-                granola_bar = Food(15, "Granola Bar")
+                print("""
+                     _____________,-.___     _
+                     |____        { {]_]_]   [_]
+                     |___ `-----.__\ \_]_]_    . `
+                     |   `-----.____} }]_]_]_   ,
+                     |_____________/ {_]_]_]_] , `
+                               `-'                    """)
+                granola_bar = Food(20, "Granola Bar")
                 print(f"Heals for:{granola_bar.statBoost} health\n")
                 inventory.append(granola_bar)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             elif foodstats_1 == "2":
-                pizza = Food(25, "Pizza")
+                print("""
+                // ""--.._
+                ||  (_)  _ "-._
+                ||    _ (_)    '-.
+                ||   (_)   __..-'
+                 \\__..--""
+                                              """)
+                pizza = Food(30, "Pizza")
                 print(f"Heals for:{pizza.statBoost} health\n")
                 inventory.append(pizza)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             elif foodstats_1 == "3":
-                apple = Food(10, "Red apple")
+                print("""
+                  ,--./,-.
+                 / #      \
+                |          |
+                 \        /    
+                  `._,._,'    """)
+                apple = Food(15, "Red apple")
                 print(f"Heals for:{apple.statBoost} health\n")
                 inventory.append(apple)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             else:
                 print("Invalid choice. Pick 1.granola bar, 2.Pizza slice, and 3.Red Apple.")
 
@@ -417,29 +834,49 @@ def room_2(player, inventory):
             foodstats_1 = input(f"Which item will {player.playerName} eat? Pick 1, 2, or 3:")
 
             if foodstats_1 == "1":
-                granola_bar = Food(15, "Granola Bar")
+                print("""
+                     _____________,-.___     _
+                     |____        { {]_]_]   [_]
+                     |___ `-----.__\ \_]_]_    . `
+                     |   `-----.____} }]_]_]_   ,
+                     |_____________/ {_]_]_]_] , `
+                               `-'                    """)
+                granola_bar = Food(20, "Granola Bar")
                 print(f"Heals for:{granola_bar.statBoost} health\n")
                 inventory.append(granola_bar)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             elif foodstats_1 == "2":
-                pizza = Food(25, "Pizza")
+                print("""
+                // ""--.._
+                ||  (_)  _ "-._
+                ||    _ (_)    '-.
+                ||   (_)   __..-'
+                 \\__..--""
+                                              """)
+                pizza = Food(30, "Pizza")
                 print(f"Heals for:{pizza.statBoost} health\n")
                 inventory.append(pizza)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             elif foodstats_1 == "3":
-                apple = Food(10, "Red apple")
+                print("""
+                  ,--./,-.
+                 / #      \
+                |          |
+                 \        /    
+                  `._,._,'    """)
+                apple = Food(15, "Red apple")
                 print(f"Heals for:{apple.statBoost} health\n")
                 inventory.append(apple)
                 print(f"{player.playerName} then moves on to the next room")
-                room_3(player)
+                room_3(player, inventory)
             else:
                 print("Invalid choice. Pick 1.granola bar, 2.Pizza slice, and 3.Red Apple.")
 #room 3
-def room_3(player):
+def room_3(player, inventory):
 
-    print(f"{player.playerName} enters room 3\n")
+    print(f"{player.playerName} enters room three\n")
     player_choice = input(f"Would {player.playerName} like to observe the room?"
                           f"1. Yes or 2.No\n"
                           f"Pick 1 or 2: ")
@@ -478,13 +915,15 @@ def room_3(player):
             print("Bunny: How rude of you! I am not just any bunny, I am SIR BUNNY THE DISTINGUISHED. I have served\n"
                   "in the great galaxy war thrice and have survived thrice, my grandfather has served in.....\n"
                   "The player decides to leave the room")
+            boss_fight2(player, inventory)
         elif player_choice == "2":
             print(f"Bunny: Howdy human! I wonder how you ended up in this corner of the galaxy. It is quite far away from\n"
                   f"your home. Here take these clothes, you can't be walking around naked like that\n "
                   f"But shoo now, I have to continue munching on these books.")
             print(f"{player.playerName} receives clothes and heads on to the next room")
+            boss_fight2(player, inventory)
         else:
-            print("You leave the room")
+            print("Please select the correct choice")
 
     else:
         print(f"{player.playerName} stands at the doorway, and someone calls out to him")
@@ -511,6 +950,117 @@ def room_3(player):
                                              """)
         print(f"A bunny talking??!??, {player.playerName} rushes towards the next room,"
               f"questioning his own sanity.")
+        boss_fight2(player, inventory)
+
+def room_4():
+    pass
+
+def room_5(player, inventory):
+    print(player.playerName,
+          "walks into the room, and is met with a sudden and bitter cold. They shudder, deciding they"
+          "will spend as little time in this room as possible.")
+    print("Where will", player.playerName, "go?")
+    print("1. Left")
+    print("2. Right")
+    room6Input = input()
+
+    if room6Input == "1":
+        print(player.playerName,
+              "decides on left. They find a mirror, one with a height that easily spans 3 feet above "
+              "their head.")
+        print(player.playerName,
+              "notices their dishevelled appearance, and quickly brushes the dirt off their face and body."
+              "They flash a quick smile in the mirror; much better.")
+        print("""     
+                         .------.        .------.
+                        /        \      /        |
+                       /_        _\    /_        _|
+                      // \      / ||  // \      /  | 
+                      |\__\    /__/|  |\__\    /__/|
+                       \    ||    /    \    ||    /
+                        \        /      \        /
+                         \  __  /        \  __  /
+                          '.__.'          '.__.'
+                           |  |            |  |
+                           |  |            |  |
+                """)
+        print("On the mirror,", player.playerName,
+              "notices a photo of two Zaraleggians. Attached to the photo is a small "
+              "candy.")
+        print("Take the candy?")
+        print("1. Yes")
+        print("2. No")
+
+        candyChoice = input()
+        if candyChoice == "1":
+            print(player.playerName, "peels the candy off the photo. It's lemon flavored. They add it to their bag.")
+            candy = Food(15, "LemonCandy")
+            inventory.append(candy)
+        elif candyChoice == "2":
+            print(player.playerName, "leaves the candy. They'd rather not get cavities today.")
+
+
+    elif room6Input == "2":
+        print(player.playerName, "strides to the right, in the direction of a table. On it rests a slip of paper.")
+        print("The paper reads, in messy Zaraleggian: ")
+        print(" 'REMEMBER TO PAY HEATING BILLS' ")
+        print("A box also rests on the desk. Grab it?")
+        print("1. Yes")
+        print("2. No")
+
+        boxChoice = input()
+        if boxChoice == "1":
+            print(player.playerName, "grabs the box and examines it. It appears to be sealed by a lock, with a "
+                                     "sequence needed to open it.")
+            print("""
+                           +--------------+
+                          /              /|
+                         /              / |
+                        *--------------*  |
+                        |     ____     |  |
+                        |    |    |    |  |
+                        |    |----|    |  |
+                        |              |  |
+                        |              | /
+                        |              |/
+                        *--------------*
+                """)
+            print("Text above the seal reads: How many letters are in the name of the resident of the third room?")
+            boxCode = input()
+
+            if boxCode == "5":
+                print("Aha! The lid pops open. Inside is a packet of ramen! Take it? Y or N")
+                ramenChoice = input()
+                if ramenChoice == "Y" or "y":
+                    print(player.playerName, " takes the ramen.")
+                    ramen = Food(55, "RamenNoodles")
+                    inventory.append(ramen)
+                elif ramenChoice == "N" or "n":
+                    print(player.playerName,
+                          "chooses not to take the ramen. It looks like someone else treasures it, anyways.")
+            else:
+                print(player.playerName,
+                      "enters the code, but the lock doesn't seem to budge. As they struggle with the "
+                      "box, a rodent leaps into their bag!")
+                if inventory:
+                    print("It is too late by the time the rodent takes off with", player.playerName,
+                          "'s food. Lost the "
+                          "last item added to bag.")
+                    lastItem = len(inventory)
+                    inventory.remove(inventory[lastItem - 1])
+
+                else:
+                    print("The rodent squirms around, before eventually jumping out and running away. How odd.")
+        elif boxChoice == "2":
+            print(player.playerName, "would rather not think about puzzles now. They leave the box.")
+
+    print(player.playerName, "scans the room once more. If they're being honest, it is quite barren, aside from"
+                             "one very long and large bed.")
+    print(player.playerName, "would rather not search a bed for items of use.")
+    print("The cold begins to become more bothersome.")
+    print(player.playerName, "moves on to the next room.")
+
+def room_6():
 
 
 #main game
