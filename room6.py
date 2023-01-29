@@ -17,7 +17,7 @@ class Food:
         self.statBoost = statValue
         self.itemName = name
 
-# test n main
+# ---------------------------------------------------------------------- ROOM 6 START FUNCTION
 def room_6(player, inventory):
     # wish i could implement a ver where they explicitly have clothes or not but o well
     print(player.playerName,"walks into the room, and is met with a sudden and bitter cold. They shudder, deciding they"
@@ -37,7 +37,7 @@ def room_6(player, inventory):
                     /        \      /        |
                    /_        _\    /_        _|
                   // \      / ||  // \      /  | 
-                 |\__\    /__/|  |\__\    /__/||
+                  |\__\    /__/|  |\__\    /__/|
                    \    ||    /    \    ||    /
                     \        /      \        /
                      \  __  /        \  __  /
@@ -117,15 +117,7 @@ def room_6(player, inventory):
     print("The cold begins to become more bothersome.")
     print(player.playerName,"moves on to the next room.")
 
-
-
-
-
-
-
-
-
-
+# -------------------------------------------------------------------------------ROOM 6 END FUNCTION
 #main
 inputName = input()
 player = Player(inputName, 100, 10, 10)
