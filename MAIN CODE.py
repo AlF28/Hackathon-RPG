@@ -252,7 +252,7 @@ def boss_fight2(player, inventory):
     print_slow("\"Hello, human. You can call me Professor Z.\" the alien said plainly.\n")
     print_slow("\"I know you're thinking 'I don't care who you are. Let me go!', but let me finish.\" said Professor Z\n")
     print_slow("Professor Z turned around and pulled out what seemed to be chalk board that uses lasers.\n")
-    print_slow("\"What you're wrapped in is my infalliable zaralegg fiber silk. I'm the first one to synthesize g chain amin... \\n"")
+    print_slow("\"What you're wrapped in is my infalliable zaralegg fiber silk. I'm the first one to synthesize g chain amin... \"\n")
     print_slow(f"{player.playerName} could feel the silk melting, allowing them to slowly pull it off during the lecture.\n")
     print_slow("\"So that's all to say that my invention is perfect for capturing human speci-\"\n")
     print_slow("Professor Z turned around to find his specimen had freed themselves from the special unbreakable fiber.\n")
