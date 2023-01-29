@@ -1203,7 +1203,7 @@ def room_4(player, inventory):
         if letter_choice == "1":
             print_slow(f"Dear {player.playerName},\n")
             print_slow("Welcome to my world.\n")
-            print_siw(f"Since you've made it this far, I thought I'd treat you with my favorite dish.\n")
+            print_slow(f"Since you've made it this far, I thought I'd treat you with my favorite dish.\n")
             print_slow(f"I'm not sure how food affects humans, but I wouldn't want you to leave without exploring my culture.\n")
             print_slow("Enjoy and see you soon,\n")
             print_slow("You'll know me when you see me\n")
