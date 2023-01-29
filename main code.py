@@ -27,44 +27,7 @@ class Enemy:
         self.enemyHealth = health
         self.enemyAttack = attack
         self.enemyDefense = defense
-#prologue story
-def prologue():
-    print(""" 
-                  *       +
-            '                  |
-        ()    .-.,="``"=.    - o -
-              '=/_       \     |
-           *   |  '=._    |
-                \     `=./`,        '
-             .   '=.__.=' `='      *import random
-import sys,time
 
-def print_slow(str):
-    for letter in str:
-        sys.stdout.write(letter)
-        sys.stdout.flush()
-        time.sleep(0.01)
-
-
-#class player
-class Player:
-    def __init__(self, name, health, attack, defense):
-        self.playerName = name
-        self.playerHealth = health
-        self.playerAttack = attack
-        self.playerDefense = defense
-#class food
-class Food:
-    def __init__(self,statValue, name):
-        self.statBoost = statValue
-        self.itemName = name
-
-#enemy class
-class Enemy:
-    def __init__(self, health, attack, defense):
-        self.enemyHealth = health
-        self.enemyAttack = attack
-        self.enemyDefense = defense
 #prologue story
 def prologue():
     print(""" 
