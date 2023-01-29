@@ -245,6 +245,67 @@ def room_1(player):
 
             else:
                 print("Not a valid input, silly! Try again: ")
+
+    elif lever == "2":
+        print(f"{player.playerName} ponders whether or not they should pull the lever.")
+        print(f"{player.playerName} goes near the lever to get a closer look. However, {player.playerName} slips\n"
+              f"and pushes on the lever on accident.")
+        print(f"{player.playerName}'s surprise a collection of three weapons descends from the ceiling\n")
+        print("The weapon choices are 1.fists, 2.sword, and 3.bow and arrow.\n")
+        choice = input(f"Which weapon will they choose?\n"
+                       f"Pick 1, 2, or 3: ")
+
+        weaponChosen = True
+        while weaponChosen:
+            if choice == "1":
+                print("""
+                        (ง ͠° ͟ل͜ ͡°)ง
+                                       """)
+                weaponChosen = False
+                print("No attacks added to player attack, you are on your own buddy!")
+                print(f"Player attack:{player.playerAttack}\n")
+                print(f"{player.playerName} chose their good ole fashion fists as their weapon, aka HARDCORE MODE")
+                print(f"{player.playerName} does some quick jabs, and enters the next room feeling slightly confident.")
+                boss_fight1(player)
+
+            elif choice == "2":
+                print("""        
+                               D
+                               I
+                            ___E___
+                              | |
+                              | |
+                              | |
+                              | |
+                              | |
+                              | |
+                              | |
+                              \ /           """)
+                player.playerAttack = player.playerAttack + 5
+                weaponChosen = False
+                print("Add +5 to player attack")
+                print(f"Player attack:{player.playerAttack}\n")
+                print(f"{player.playerName} chose the medieval longsword as their weapon.")
+                print(f"{player.playerName} slashes the wind the sword to test it's sharpness "
+                      f"then enters the next room feeling confident.")
+                boss_fight1(player)
+
+            elif choice == "3":
+                print("""  
+                        >>>>>----------------------->
+                               """)
+                player.playerAttack = player.playerAttack + 4
+                weaponChosen = False
+                print("Add +4 to player attack!")
+                print(f"Player attack:{player.playerAttack}\n")
+                print(
+                    f"{player.playerName} is feeling like Katniss Everdeen and chose the bow and arrow as their weapon")
+                print(f"{player.playerName} aims with the bow to test it's strength.{player.playerName} then enters \n"
+                      f"the next room, feeling confident.")
+                boss_fight1(player)
+
+            else:
+                print("Not a valid input, silly! Try again: ")
 #room 2
 def room_2(player, inventory):
     print(f"{player.playerName} has entered room 2.\n")
@@ -378,11 +439,12 @@ def room_2(player, inventory):
 #room 3
 def room_3(player):
 
-    print("Player enters room 3\n")
-    player_choice = input("Would Player like to observe the room?"
-                          "Type Yes: ")
+    print(f"{player.playerName} enters room 3\n")
+    player_choice = input(f"Would {player.playerName} like to observe the room?"
+                          f"1. Yes or 2.No\n"
+                          f"Pick 1 or 2: ")
 
-    if player_choice == "Yes":
+    if player_choice == "1":
         print(f"Player looks around the room, it is unlike all the other rooms he have been to. The room is filled with various books\n"
               f"of different languages. And on top of the pile of books sits a bunny\n")
         print("""
@@ -425,7 +487,30 @@ def room_3(player):
             print("You leave the room")
 
     else:
-        print("The player leaves the room")
+        print(f"{player.playerName} stands at the doorway, and someone calls out to him")
+        print(f"{player.playerName} turns towards the voice and sees a bunny talking.")
+        print("""
+                        /|      __
+                       / |   ,-~ /
+                      Y :|  //  /
+                      | jj /( .^
+                      >-"~"-v"
+                     /       Y
+                    jo  o    |
+                   ( ~T~     j
+                    >._-' _./
+                   /   "~"  |
+                  Y     _,  |
+                 /| ;-"~ _  l
+                / l/ ,-"~    \
+                \//\/      .- \
+                 Y        /    Y    
+                 l       I     !
+                 ]\      _\    /"\
+                (" ~----( ~   Y.  )
+                                             """)
+        print(f"A bunny talking??!??, {player.playerName} rushes towards the next room,"
+              f"questioning his own sanity.")
 
 
 #main game
@@ -454,13 +539,15 @@ def main():
              f"makes {player.playerName} miss his home. In the corner,to the right, lays a pile of corpses. The smell coming from\n"
              f"the corpses makes {player.playerName} want to get out of here faster.\n")
         player_choice= input(f"Will {player.playerName} go to next room?\n"
-                             f"1. Yes or 2. Maybe\n"
+                             f"1. Yes or 2. No\n"
                              f"Pick 1 or 2: ")
         if player_choice == "1":
             room_1(player)
-        else:
-            print(f"{player.playerName} rushes out and enters the next room.")
-            room_1(player)
+        elif player_choice == "2":
+            print(f"{player.playerName} holds their nose as the stench of dead bodies fills the room.")
+            player_choice = input("Press 1 to go to next room: ")
+            if player_choice == "1":
+                room_1(player)
 
 
     else:
