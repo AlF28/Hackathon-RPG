@@ -1,24 +1,12 @@
-# -implementing the player and enemy stats, as well as enemy counts,
-# inventory also: weapon, food/items, weapon types with player
-# and enemy stats (also enemy weapons),
-
-# this will be gained from main beginning
-
-# random is used for battle sequence
 import random
 
-# create the playerChar character that has health, att, def, name; should define inventory within main bc it
-# will add user created objects inside
-# limit the health value to be 100 or at least 0
 class Player:
-    def __init__(self,name, health, attack, defense):
+    def __init__(self, name, health, attack, defense):
         self.playerName = name
         self.playerHealth = health
         self.playerAttack = attack
         self.playerDefense = defense
 
-
-# when callin to an enemy in main, will pass in stats per each enemy
 class Enemy:
     def __init__(self, health, attack, defense):
         self.enemyHealth = health
@@ -29,41 +17,18 @@ class Food:
     def __init__(self,statValue, name):
         self.statBoost = statValue
         self.itemName = name
-    # displayDescription can be changed, does not have to be set to this
-    def displayDescription(self):
-        print ("This item is " , self.itemName, ",which provides +", self.statBoost,"to", player.playerName, "'s health. ")
-        print("Tastes a little stale, but at least it isn't Hawaiian.")
-
-
-
 
 # test n main
 inputName = input()
 player = Player(inputName, 100, 10, 10)
-enemy1 = Enemy(50, 6, 8)
-
-print(player.playerName, player.playerAttack, player.playerDefense, player.playerHealth)
+enemy1 = Enemy(500, 6, 8)
 
 pizza = Food(35, "DeepDishPizza")
-pizza.displayDescription()
+saltines = Food(10, "DrySaltines")
 
-saltines = Food(10, "Saltine Crackers")
-
-# inventory should be added in main to allow easy access
-# add to inventory using .append()
-# remove items somehow
 inventory = []
 inventory.append(pizza)
 inventory.append(saltines)
-if inventory:
-    print(player.playerName, "looks in their inventory. They find: ")
-    for x in range(len(inventory)):
-        print(x+1,".",inventory[x].itemName)
-    print("What item will they choose? ") # give option for player input based on number, and also option for no selection
-
-else:
-    print("No items in inventory!")
-
 
 # -------------------------------------------------------------- PLAYER FINDING WEAPON
 
@@ -102,7 +67,7 @@ print(player.playerName, "continues on.")
 # in addition, if we want to name the enemies (like actual names, or something like High Priestess (Alien race name) or
 # General (Alien Race; you get the point), then change all instances of enemy1/ "Enemy" with that name
 
-battleBegin = 0
+battleBegin = 1
 print(player.playerName,"has encountered an enemy! The enemy glares menacingly and brandishes their weapon. The "
                         "blade gleams in the light.")
 maxHealth = player.playerHealth
@@ -119,31 +84,69 @@ while battleBegin == 1:
     print("3. Open Inventory")
     playerChoice = input()
     if playerChoice == "1":
-        # crit rand value = crit value == 1 then it crits, if anything else skip over; deal 50% more damage if crit
-        # lucky hit! player swings and lands a lucky hit!
-        damageDealt = random.randint(player.playerAttack-2,player.playerAttack+2) - enemy1.enemyDefense/4
-
-        crit = random.randint(1,10)
-        if crit == 1:
-            damageDealt = damageDealt * 2
-            print("Lucky hit!", player.playerName, "deals", damageDealt,"points of pain to the enemy!")
-            enemy1.enemyHealth = enemy1.enemyHealth - damageDealt
+        playerMiss = random.randint(1,20)
+        enemyMiss = random.randint(1,20)
+        # player attacks here
+        if playerMiss == 1:
+            print("Oh no!",player.playerName,"slips, and misses!")
         else:
-            print(player.playerName,"attacks swiftly! They deliver", damageDealt,"damage to the enemy!")
-            # can create a print line here that reads when enemy health is under 50%, and based on who the enemy is
-            enemy1.enemyHealth = enemy1.enemyHealth - damageDealt
+            damageDealt = random.randint(player.playerAttack-2,player.playerAttack+2) - enemy1.enemyDefense/4
+
+            crit = random.randint(1,10)
+            if crit == 1:
+                damageDealt = damageDealt * 2
+                print("Lucky hit!", player.playerName, "deals", damageDealt,"points of pain to the enemy!")
+                enemy1.enemyHealth = enemy1.enemyHealth - damageDealt
+            else:
+                print(player.playerName,"attacks swiftly! They deliver", damageDealt,"damage to the enemy!")
+                enemy1.enemyHealth = enemy1.enemyHealth - damageDealt
 
         if enemy1.enemyHealth >= 0:
+            # enemy attacks here
             damageReceived = random.randint(enemy1.enemyAttack - 2, enemy1.enemyAttack +2) - player.playerDefense/4
 
-            critE = random.randint(1, 10)
-            if critE == 1:
-                damageReceived = damageReceived * 2
-                print("Unlucky! Enemy deals", damageDealt, "damage to", player.playerName,"!")
-                player.playerHealth = player.playerHealth - damageReceived
+            if enemyMiss == 1:
+                print(player.playerName,"cheers as the enemy misses. Lucky turn!")
             else:
-                print("Enemy attacks",player.playerName,"! Enemy deals", damageReceived, "damage to", player.playerName,"!")
-                player.playerHealth = player.playerHealth - damageReceived
+                critE = random.randint(1, 10)
+                if critE == 1:
+                    damageReceived = damageReceived * 2
+                    print("Unlucky! Enemy deals", damageDealt, "damage to", player.playerName,"!")
+                    player.playerHealth = player.playerHealth - damageReceived
+                else:
+                    print("Enemy attacks",player.playerName,"and deals", damageReceived, "damage to", player.playerName,"!")
+                    player.playerHealth = player.playerHealth - damageReceived
+
+        # now check if enemy or player are dead
+        if (enemy1.enemyHealth < maxHealthE/3) and (enemy1.enemyHealth > 0):
+            print("The enemy looks shaken! Deliver the final blow soon!")
+        if enemy1.enemyHealth <= 0:
+            print(player.playerName,"has defeated the enemy! They can progress to the next room!")
+            battleBegin = 0
+
+        if (player.playerHealth < maxHealth/3) and (player.playerHealth > 0):
+            print("Oh no!", player.playerName,"feels themselves weakening. Don't give up,",player.playerName,"!")
+
+        if player.playerHealth <= 0:
+            print(player.playerName, "sputters, then collapses. They have been defeated by the enemy.")
+            print("GAME OVER")
+            battleBegin = 2
+
+    elif playerChoice == "2":
+        # dodge has a chance of dealing less damage without being hit, but has a higher chance of fail and being hit
+        # not finished
+        dodge = random.randint(1,10)
+
+        if dodge >= 4:
+            missHit = random.randint(enemy1.enemyAttack - 2, enemy1.enemyAttack + 2)
+            print(player.playerName,"prepares to leap out of the way, but they miscalculate their enemy! "
+                                    "The hit lands, dealing", missHit,"damage along the way.")
+            player.playerHealth = player.playerHealth - missHit
+        else:
+            dodgeDamage = random.randint(player.playerAttack-2,player.playerAttack+2) - enemy1.enemyDefense/2
+            print(player.playerName,"readies themself and springs out of the way at the last second. They strike at "
+                                    "the enemy, and deal",dodgeDamage,"damage.")
+            enemy1.enemyHealth = enemy1.enemyHealth - dodgeDamage
 
         if (enemy1.enemyHealth < maxHealthE/3) and (enemy1.enemyHealth > 0):
             print("The enemy looks shaken! Deliver the final blow soon!")
@@ -157,18 +160,29 @@ while battleBegin == 1:
         if player.playerHealth <= 0:
             print(player.playerName, "sputters, then collapses. They have been defeated by the enemy.")
             print("GAME OVER")
-            battleBegin = 2;
+            battleBegin = 2
 
-    if playerChoice == 2:
-        # dodge has a chance of dealing less damage without being hit, but has a higher chance of fail and being hit
-        # not finished
-        dodge = random.randint(1,10)
+    elif playerChoice == "3":
+        print(player.playerName,"opens their bag. They find:")
 
-        if dodge >= 4:
-            print("Enemy swings at",player.playerName,"")
+        if inventory:
+            for x in range(len(inventory)):
+                print(x + 1, ".", inventory[x].itemName,": Provides +",inventory[x].statBoost," health")
 
-    if playerChoice == 3:
-        
+            print("What item will they choose? ")  # give option for player input based on number
+            inventoryChoice = input()
+            convert = int(inventoryChoice)
+            itemConsumed = inventory[convert-1]
+            player.playerHealth = player.playerHealth + itemConsumed.statBoost
+            if player.playerHealth > 100:
+                player.playerHealth = 100
+
+            inventory.remove(itemConsumed)
+            print(player.playerName,"consumed the",itemConsumed.itemName,"and smiles. Tastes good! Their health is now",
+                  player.playerHealth,"out of 100.")
+
+        else:
+            print(player.playerName,"blinks, then tips their bag upside down. Nothing falls out.")
 
     else:
         print(player.playerName,"grumbles. Give them a real choice, they only have so much time!")
