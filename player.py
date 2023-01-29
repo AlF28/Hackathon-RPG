@@ -168,18 +168,23 @@ while battleBegin == 1:
         if inventory:
             for x in range(len(inventory)):
                 print(x + 1, ".", inventory[x].itemName,": Provides +",inventory[x].statBoost," health")
+            endValue = len(inventory)
+            print(endValue + 1,". Close inventory")
+            print("What item will they choose?")
 
-            print("What item will they choose? ")  # give option for player input based on number
             inventoryChoice = input()
             convert = int(inventoryChoice)
-            itemConsumed = inventory[convert-1]
-            player.playerHealth = player.playerHealth + itemConsumed.statBoost
-            if player.playerHealth > 100:
-                player.playerHealth = 100
 
-            inventory.remove(itemConsumed)
-            print(player.playerName,"consumed the",itemConsumed.itemName,"and smiles. Tastes good! Their health is now",
+            if convert != endValue + 1:
+                itemConsumed = inventory[convert-1]
+                player.playerHealth = player.playerHealth + itemConsumed.statBoost
+                if player.playerHealth > 100:
+                    player.playerHealth = 100
+
+                inventory.remove(itemConsumed)
+                print(player.playerName,"consumed the",itemConsumed.itemName,"and smiles. Tastes good! Their health is now",
                   player.playerHealth,"out of 100.")
+
 
         else:
             print(player.playerName,"blinks, then tips their bag upside down. Nothing falls out.")
