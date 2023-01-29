@@ -117,11 +117,11 @@ def boss_fight1(player):
     inventory = []
     zaralegg_general_1 = Enemy(60, 6, 8) #enemy stats
     battleBegin = 1
-    print(player.playerName, "has encountered an enemy! The enemy glares menacingly and brandishes their weapon. The "
-                             "blade gleams in the light.")
-    print("I am the great first general of the Zaralegg race, and YOU! HOW DARE YOU TRY AND ESCAPE!!!"
-          "I will show you puny human the power of the ZARALEGG RACE. MUAHAHAHA")
-    print(f"{player.playerName} readies their weapon, confident in their skills.")
+    print_slow(player.playerName, "has encountered an enemy! The enemy glares menacingly and brandishes their weapon. The\n"
+                             "blade gleams in the light.\n")
+    print_slow("I am the great first general of the Zaralegg race, and YOU! HOW DARE YOU TRY AND ESCAPE!!!\n"
+          "I will show you puny human the power of the ZARALEGG RACE. MUAHAHAHA\n")
+    print_slow(f"{player.playerName} readies their weapon, confident in their skills.\n")
 
     maxHealth = 100
     maxHealthE = 60
@@ -286,14 +286,14 @@ def boss_fight2(player, inventory):
        \___/   \___/    """)
     print(f"Suddenly {player.playerName} is lying on the floor when a figure appears out of the shadows.")
     print(f"{player.playerName} strains their head to look up at the tall, lanky alien standing in front of them. ")
-    print("\"Hello, human. You can call me Professor Z.\" the alien said plainly.")
-    print("\"I know you're thinking 'I don't care who you are. Let me go!', but let me finish.\" said Professor Z")
-    print("Professor Z turned around and pulled out what seemed to be chalk board that uses lasers.")
-    print("\"What you're wrapped in is my infalliable zaralegg fiber silk. I'm the first one to synthesize g chain amin... \"")
-    print(f"{player.playerName} could feel the silk melting, allowing them to slowly pull it off during the lecture.")
-    print("\"So that's all to say that my invention is perfect for capturing human speci-\"")
-    print("Professor Z turned around to find his specimen had freed themselves from the special unbreakable fiber.")
-    print("\"Impossible! I've been working on this for eleventeen gorbles. Well, now I have to kill you.\" Professor Z announced.\n")
+    print_slow("\"Hello, human. You can call me Professor Z.\" the alien said plainly.\n")
+    print_slow("\"I know you're thinking 'I don't care who you are. Let me go!', but let me finish.\" said Professor Z\n")
+    print_slow("Professor Z turned around and pulled out what seemed to be chalk board that uses lasers.\n")
+    print_slow("\"What you're wrapped in is my infalliable zaralegg fiber silk. I'm the first one to synthesize g chain amin... \\n"")
+    print_slow(f"{player.playerName} could feel the silk melting, allowing them to slowly pull it off during the lecture.\n")
+    print_slow("\"So that's all to say that my invention is perfect for capturing human speci-\"\n")
+    print_slow("Professor Z turned around to find his specimen had freed themselves from the special unbreakable fiber.\n")
+    print_slow("\"Impossible! I've been working on this for eleventeen gorbles. Well, now I have to kill you.\" Professor Z announced.\n")
 
     enemy2 = Enemy(100, 10, 15)
     battleBegin = 1
@@ -1175,7 +1175,7 @@ def room_3(player, inventory):
          ]\      _\    /"\
         (" ~----( ~   Y.  )
                                      """)
-        print("Bunny: Would you look at that? A human appeared!. The last human I saw was millions of years ago.")
+        print_slow("Bunny: Would you look at that? A human appeared!. The last human I saw was millions of years ago.\n")
         print("The player stares with wide eyes.")
         print("Choose player input:\n"
               "1. How can the bunny talk??!?\n"
@@ -1222,7 +1222,7 @@ def room_3(player, inventory):
         print(f"A bunny talking??!??, {player.playerName} rushes towards the next room,"
               f"questioning his own sanity.")
         boss_fight2(player, inventory)
-
+#room 4
 def room_4(player, inventory):
     print(f"{player.playerName} hesistanly enters room four.\n")
     print(f"The room is pitch black.")
@@ -1238,12 +1238,12 @@ def room_4(player, inventory):
         print(f"A letter is propped up on the table with {player.playerName}'s name")
         letter_choice = input("Read the letter: 1.Yes or 2.No")
         if letter_choice == "1":
-            print(f"Dear {player.playerName},\n")
-            print("Welcome to my world.")
-            print(f"Since you've made it this far, I thought I'd treat you with my favorite dish.")
-            print(f"I'm not sure how food affects humans, but I wouldn't want you to leave without exploring my culture.")
-            print("Enjoy and see you soon,")
-            print("You'll know me when you see me")
+            print_slow(f"Dear {player.playerName},\n")
+            print_slow("Welcome to my world.\n")
+            print_siw(f"Since you've made it this far, I thought I'd treat you with my favorite dish.\n")
+            print_slow(f"I'm not sure how food affects humans, but I wouldn't want you to leave without exploring my culture.\n")
+            print_slow("Enjoy and see you soon,\n")
+            print_slow("You'll know me when you see me\n")
             print()
             alien_food = input("Eat the alien food: 1.Yes or 2.No\n")
             if alien_food == "1":
@@ -1310,7 +1310,7 @@ def room_5(player, inventory):
     elif room6Input == "2":
         print(f"{player.playerName} strides to the right, in the direction of a table. On it rests a slip of paper.\n")
         print("The paper reads, in messy Zaraleggian: ")
-        print(" 'REMEMBER TO PAY HEATING BILLS' ")
+        print_slow(" 'REMEMBER TO PAY HEATING BILLS' \n")
         print("A box also rests on the desk. Grab it?")
         print("1. Yes")
         print("2. No")
@@ -1413,16 +1413,16 @@ def room_6(player, inventory):
                   "the old woman anyways.")
         print(player.playerName, "approaches the old woman warily, seating themselves across her. She doesn't seem to"
                                  "acknowledge them.")
-        print("After a beat, she stops stirring her pot and speaks.")
-        print("Old Woman: Many a traveler have set foot exactly where you have gone.")
-        print("Old Woman: And every single one of them never achieve the ending they seek.")
-        print("Old Woman: Perhaps if I were younger, I'd have done the same. But these bones would've never survived.")
-        print(
-            "Old Woman: Your battles may have been tough so far, but they will be nothing like what is behind that door.")
-        print("Old Woman: It may not be much, but I can offer you this.")
-        print("The old woman hands", player.playerName, "a wooden bowl of soup.")
-        print("Old Woman: Use it well. And hope that our paths never cross again.")
-        print("The old woman turns her attention back to her pot. She doesn't seem to have anything else to say.")
+        print_slow("After a beat, she stops stirring her pot and speaks.\n")
+        print_slow("Old Woman: Many a traveler have set foot exactly where you have gone.\n")
+        print_slow("Old Woman: And every single one of them never achieve the ending they seek.\n")
+        print_slow("Old Woman: Perhaps if I were younger, I'd have done the same. But these bones would've never survived.\n")
+        print_slow(
+            "Old Woman: Your battles may have been tough so far, but they will be nothing like what is behind that door.\n")
+        print_slow("Old Woman: It may not be much, but I can offer you this.\n")
+        print_slow("The old woman hands", player.playerName, "a wooden bowl of soup.\n")
+        print_slow("Old Woman: Use it well. And hope that our paths never cross again.\n")
+        print("The old woman turns her attention back to her pot. She doesn't seem to have anything else to say.\n")
         print(player.playerName, "saves the soup for later.")
         print("'Grandma's Soup' added to Bag!")
         soup = Food(100, "Grandma's Soup")
