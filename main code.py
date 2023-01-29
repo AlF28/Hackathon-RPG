@@ -2525,7 +2525,7 @@ def room_5(player, inventory):
         print("1. Yes")
         print("2. No")
 
-        candyChoice = input("Enter 1 or 2")
+        candyChoice = input("Enter 1 or 2: ")
         if candyChoice == "1":
             print(f"{player.playerName} peels the candy off the photo. It's lemon flavored. They add it to their bag.\n")
             candy = Food(20, "LemonCandy")
@@ -2542,7 +2542,7 @@ def room_5(player, inventory):
         print("1. Yes")
         print("2. No")
 
-        boxChoice = input("Enter 1 or 2")
+        boxChoice = input("Enter 1 or 2: ")
         if boxChoice == "1":
             print(f"{player.playerName} grabs the box and examines it. It appears to be sealed by a lock, with a "
                                      "sequence needed to open it.")
